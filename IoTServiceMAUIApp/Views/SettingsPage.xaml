@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:IoTServiceMAUIApp.ViewModels"
+             x:Class="IoTServiceMAUIApp.Views.SettingsPage">
+
+    <VerticalStackLayout Padding="20">
+        <Label Text="Azure IoT Hub Connection String"/>
+        <Entry Placeholder="Connection String" Text="{Binding ConnectionString}" />
+        <Label Text="Azure Communications Email Service Connection String"/>
+        <Entry Placeholder="Connection String" Text="{Binding EmailServiceConnectionString}" />
+        <Label Text="Recipient Email Address"/>
+        <Entry Placeholder="Email Address" Text="{Binding EmailAddress}" />
+        <Label Text="Sender Email Address"/>
+        <Entry Placeholder="Email Address" Text="{Binding SenderEmailAddress}" />
+        <Button Text="Save Settings" Command="{Binding SaveCommand}" />
+    </VerticalStackLayout>
+</ContentPage>

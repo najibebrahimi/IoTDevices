@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:IoTServiceMAUIApp.ViewModels"
+             x:Class="IoTServiceMAUIApp.Views.AllDevicesPage">
+
+    <StackLayout Margin="20" Spacing="10">
+        <CollectionView x:Name="DevicesCollectionView"
+                        ItemsSource="{Binding AllDevices}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding SelectDeviceCommand}"
+                        SelectionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=SelectedItem}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Vertical" Padding="10" Spacing="5">
+                        <Label Text="{Binding DeviceId}" 
+                               FontSize="22" 
+                               FontAttributes="Bold" 
+                               VerticalOptions="Center" />
+
+                        <Label Text="{Binding Status}" 
+                               FontSize="14" 
+                               TextColor="Silver" 
+                               VerticalOptions="Center" />
+
+                        <Label Text="{Binding Properties.Reported}"
+                               FontSize="12"
+                               TextColor="Gray"
+                               VerticalOptions="CenterAndExpand"
+                               LineBreakMode="WordWrap" />
+
+                        <Button Text="Delete"
+                                BackgroundColor="Red"
+                                TextColor="White"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:DevicesViewModel}}, Path=DeleteDeviceCommand}"
+                                CommandParameter="{Binding .}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Error message label -->
+        <Label Text="{Binding ErrorMessage}"
+               TextColor="Red"
+               FontAttributes="Italic"
+               IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}"
+               HorizontalOptions="Center" />
+    </StackLayout>
+
+</ContentPage>
